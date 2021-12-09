@@ -87,10 +87,6 @@ function library:Destroy()
         keybindConnection:Disconnect()
     end
 end
-function library:Hide()
-   TurtleUiLib.Enabled = not TurtleUiLib.Enabled
-end	
-
 function library:Keybind(key)
     if keybindConnection then keybindConnection:Disconnect() end
 
@@ -109,8 +105,8 @@ function library:Window(name)
 
     UiWindow.Name = "UiWindow"
     UiWindow.Parent = TurtleUiLib
-    UiWindow.BackgroundColor3 = Color3.fromRGB(54, 54, 53)
-    UiWindow.BorderColor3 = Color3.fromRGB(54, 54, 53)
+    UiWindow.BackgroundColor3 = Color3.fromRGB(0, 151, 230)
+    UiWindow.BorderColor3 = Color3.fromRGB(0, 151, 230)
     UiWindow.Position = UDim2.new(0, xOffset, 0, 20)
     UiWindow.Size = UDim2.new(0, 207, 0, 33)
     UiWindow.ZIndex = 4 + zindex
@@ -122,7 +118,7 @@ function library:Window(name)
     local Header = Instance.new("Frame")
     Header.Name = "Header"
     Header.Parent = UiWindow
-    Header.BackgroundColor3 = Color3.fromRGB(54, 54, 53)
+    Header.BackgroundColor3 = Color3.fromRGB(0, 168, 255)
     Header.BorderColor3 = Color3.fromRGB(0, 168, 255)
     Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
     Header.Size = UDim2.new(0, 207, 0, 26)
@@ -131,7 +127,7 @@ function library:Window(name)
     local HeaderText = Instance.new("TextLabel")
     HeaderText.Name = "HeaderText"
     HeaderText.Parent = Header
-    HeaderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    HeaderText.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     HeaderText.BackgroundTransparency = 1.000
     HeaderText.Position = UDim2.new(0, 0, -0.0020698905, 0)
     HeaderText.Size = UDim2.new(0, 206, 0, 33)
@@ -146,7 +142,7 @@ function library:Window(name)
     Minimise.Name = "Minimise"
     Minimise.Parent = Header
     Minimise.BackgroundColor3 = Color3.fromRGB(0, 168, 255)
-    Minimise.BorderColor3 = Color3.fromRGB(54, 54, 53)
+    Minimise.BorderColor3 = Color3.fromRGB(0, 168, 255)
     Minimise.Position = UDim2.new(0, 185, 0, 2)
     Minimise.Size = UDim2.new(0, 22, 0, 22)
     Minimise.ZIndex = 7 + zindex
@@ -165,7 +161,7 @@ function library:Window(name)
 
     Window.Name = "Window"
     Window.Parent = Header
-    Window.BackgroundColor3 = Color3.fromRGB(54, 54, 53)
+    Window.BackgroundColor3 = Color3.fromRGB(47, 54, 64)
     Window.BorderColor3 = Color3.fromRGB(47, 54, 64)
     Window.Position = UDim2.new(0, 0, 0, 0)
     Window.Size = UDim2.new(0, 207, 0, 33)
@@ -232,8 +228,6 @@ function library:Window(name)
             Label.TextColor3 = color
         end
         pastSliders[winCount] = false
-	
-	return Label
     end
     function functions:Toggle(text, on, callback)
         local callback = callback or function() end
@@ -279,7 +273,7 @@ function library:Window(name)
 
         ToggleFiller.Name = "ToggleFiller"
         ToggleFiller.Parent = ToggleButton
-        ToggleFiller.BackgroundColor3 = Color3.fromRGB(68, 189, 50)
+        ToggleFiller.BackgroundColor3 = Color3.fromRGB(51, 153, 255)
         ToggleFiller.BorderColor3 = Color3.fromRGB(47, 54, 64)
         ToggleFiller.Position = UDim2.new(0, 5, 0, 5)
         ToggleFiller.Size = UDim2.new(0, 12, 0, 12)
@@ -321,7 +315,7 @@ function library:Window(name)
         BoxDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         BoxDescription.BackgroundTransparency = 1.000
         BoxDescription.Position = UDim2.new(-0.894736826, 0, 0, 0)
-        BoxDescription.Size = UDim2.new(0, 90, 0, 26)
+        BoxDescription.Size = UDim2.new(0, 75, 0, 26)
         BoxDescription.Font = Enum.Font.SourceSans
         BoxDescription.Text = text or "Box"
         BoxDescription.TextColor3 = Color3.fromRGB(245, 246, 250)
@@ -474,18 +468,8 @@ function library:Window(name)
         Max.TextXAlignment = Enum.TextXAlignment.Right
         Max.ZIndex = 2 + zindex
         pastSliders[winCount] = true
-
-        local slider = {}
-        function slider:SetValue(value)
-	    value = math.clamp(value, min, max)
-            local xOffset = (value-min)/max * (Slider.Size.X.Offset)
-            SliderButton.Position = UDim2.new(0, xOffset , -1.33333337, 0);
-            SilderFiller.Size = UDim2.new(0, xOffset, 0, 6)
-            Current.Text = tostring(math.round(value))
-        end
-        return slider
     end
-    function functions:Dropdown(text, buttons, callback, selective)
+    function functions:Dropdown(text, buttons, callback)
         local text = text or "Dropdown"
         local buttons = buttons or {}
         local callback = callback or function() end
@@ -583,9 +567,6 @@ function library:Window(name)
             Button_2.MouseButton1Up:Connect(function()
                 callback(name)
 		DropdownFrame.Visible = false
-		if selective then
-		   Dropdown.Text = name
-		end
             end)
         end
         function dropFunctions:Remove(name)
