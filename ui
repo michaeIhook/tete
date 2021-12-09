@@ -321,7 +321,7 @@ function library:Window(name)
         BoxDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         BoxDescription.BackgroundTransparency = 1.000
         BoxDescription.Position = UDim2.new(-0.894736826, 0, 0, 0)
-        BoxDescription.Size = UDim2.new(0, 75, 0, 26)
+        BoxDescription.Size = UDim2.new(0, 90, 0, 26)
         BoxDescription.Font = Enum.Font.SourceSans
         BoxDescription.Text = text or "Box"
         BoxDescription.TextColor3 = Color3.fromRGB(245, 246, 250)
